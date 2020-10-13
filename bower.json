@@ -1,0 +1,13 @@
+{
+  "name": "mouse-racer",
+  "description": "",
+  "main": "",
+  "authors": [
+    "nejdetkadir <nejdetkadir.550@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "game"
+  ],
+  "homepage": "https://github.com/nejdetkadir/mouse-racer"
+}
