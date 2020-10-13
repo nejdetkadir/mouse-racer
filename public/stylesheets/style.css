@@ -7,3 +7,9 @@
 .stop{
   background-color: #f8d7da !important;
 }
+.fa-times{
+  color: red;
+}
+.fa-check{
+  color: green;
+}
