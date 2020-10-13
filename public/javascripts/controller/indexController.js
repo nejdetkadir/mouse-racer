@@ -1,6 +1,6 @@
 app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFactory) => {
 
-  $scope.users = [];
+  $scope.users = {};
 
   $scope.init = () => {
     const username = prompt('Please enter your username');
@@ -20,8 +20,14 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
       socket.emit('newUser', {
         username
       });
+
       socket.on('newUser', (data) => {
-        $scope.users.push(data);
+        $scope.users[data.id] = data;
+        $scope.$apply();
+      });
+
+      socket.on('disUser', (data) => {
+        delete $scope.users[data.id];
         $scope.$apply();
       });
     }).catch((err) => {

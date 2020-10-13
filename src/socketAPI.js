@@ -3,7 +3,7 @@ const io = socketio();
 const socketAPI = {
 
 };
-const users = [];
+const users = {};
 
 socketAPI.io = io;
 io.on('connection', (socket) => {
@@ -15,8 +15,13 @@ io.on('connection', (socket) => {
       totalClick: 0,
     };
     const userData = Object.assign(data, defaultData);
-    users.push(userData);
+    users[socket.id] = userData;
     socket.broadcast.emit('newUser', userData);
+  });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('disUser', users[socket.id]);
+    delete users[socket.id];
   });
 });
 
