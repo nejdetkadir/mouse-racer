@@ -1,8 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.wait{
+  background-color: #fff3cd !important;
 }
-
-a {
-  color: #00B7FF;
+.start{
+  background-color: #d4edda !important;
+}
+.stop{
+  background-color: #f8d7da !important;
 }

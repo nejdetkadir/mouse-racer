@@ -9,5 +9,10 @@
   "keywords": [
     "game"
   ],
-  "homepage": "https://github.com/nejdetkadir/mouse-racer"
+  "homepage": "https://github.com/nejdetkadir/mouse-racer",
+  "dependencies": {
+    "angular": "^1.8.1",
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1"
+  }
 }
