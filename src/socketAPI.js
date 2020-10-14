@@ -21,6 +21,19 @@ function gameIsStarted(users) {
   }
 }
 
+function gameWon(users) {
+  let max_click = 0;
+  let socket_id = 0;
+  for (const property in users) {
+    users[property].readyStatus = 0;
+    if (max_click < users[property].totalClick) {
+      max_click = users[property].totalClick;
+      socket_id = users[property].id;
+    }
+  }
+  return socket_id;
+}
+
 socketAPI.io = io;
 io.on('connection', (socket) => {
   //console.log('a user connected.');
@@ -37,7 +50,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    socket.broadcast.emit('disUser', users[socket.id]);
+    socket.broadcast.emit('disUser', {id: users[socket.id]});
     delete users[socket.id];
   });
 
@@ -49,7 +62,25 @@ io.on('connection', (socket) => {
       socket.broadcast.emit('gameStart');
       socket.emit('gameStart');
     }
+  });
 
+  socket.on('clickButton', (data) => {
+    users[data.data].totalClick++;
+  });
+
+  socket.on('gameStarted', () => {
+    let order = 0;
+    const interval = setInterval(() => {
+      if (order===5) {
+        clearInterval(interval);
+        socket.emit('gameFinish', {
+          data: gameWon(users)
+        });
+        socket.emit('initUsers', users);
+      } else {
+        order++;
+      }
+    }, 1000);
   });
 });
 

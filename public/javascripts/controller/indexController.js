@@ -55,7 +55,24 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         setTimeout(() => {
           $('#game-status').html('START, CLICK THIS BUTTON!');
           $('#clickArea').removeClass('wait').addClass('start');
+          $('#clckBut').prop("disabled", false);
+          socket.emit('gameStarted');
         }, 2500);
+      });
+
+      $scope.clickCalculator = ($event) => {
+        socket.emit('clickButton', {
+          data: socket.id
+        });
+      };
+
+      socket.on('gameFinish', (data) => {
+        $('#game-status').html('Waiting for players to ready up');
+        $('#clickArea').removeClass('start').addClass('stop');
+        $('#clckBut').prop("disabled", true);
+        $('#rdy').html('Ready').removeClass('btn-danger').addClass('btn-primary').attr('disabled', false);
+        const username = $scope.users[data.data].username;
+        alert(`${username} is winner!`);
       });
 
     }).catch((err) => {
