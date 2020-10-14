@@ -49,6 +49,14 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         $scope.$apply();
       });
 
+      socket.on('gameStart', () => {
+        $('#clickArea').removeClass('stop').addClass('wait');
+        $('#game-status').html('ATTENTOON!');
+        setTimeout(() => {
+          $('#game-status').html('START, CLICK THIS BUTTON!');
+          $('#clickArea').removeClass('wait').addClass('start');
+        }, 2500);
+      });
 
     }).catch((err) => {
       console.log(err);

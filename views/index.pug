@@ -23,8 +23,14 @@ block content
               | Click number:
               span#click-num 0
           .col-md-3
-        .jumbotron.jumbotron-fluid.start
-          .container
-            p#game-status.lead Players waiting..
+        .row
+          .col-md-3
+          .col-md-6
+            .jumbotron.jumbotron-fluid.stop#clickArea
+              .container
+                p#game-status.lead Waiting for Players to ready up
+                button.btn.btn-outline-success#clckBut(type='button' disabled='disabled' ng-click="clickCalculator($event)") CLICK ME
+          .col-md-3
+
       div(align='center')
         button.btn.btn-success#rdy(type='button' ng-click="onReadyClick($event)") Ready
