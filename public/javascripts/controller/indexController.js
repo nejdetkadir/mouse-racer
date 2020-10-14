@@ -11,7 +11,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
   };
 
   function initSocket(username) {
-    const url = 'http://localhost:3000'; // development
+    const url = 'https://mouse-racer.herokuapp.com'; // development
     indexFactory.connectSocket(url, {
       reconnectionAttempts: 3,
       reconnectionDelay: 600
