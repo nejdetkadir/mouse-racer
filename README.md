@@ -6,6 +6,9 @@ When ready all players, game is starts. If you are best mouse racer, i am sure y
 
 ![cover](doc/cover.jpg)
 
+### Screenshot from application
+![cover](doc/ss.png)
+
 # Project setup
 ### Prerequirites
 - NodeJS (>=10.x)
