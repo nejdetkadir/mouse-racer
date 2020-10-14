@@ -8,10 +8,10 @@ block content
           .col-md-3
           .col-md-6
             ul.list-group(ng-repeat="user in users")
-              li.list-group-item(ng-if="!user.readyStatus")
+              li.list-group-item(ng-if="!user.readyStatus" id="{{user.id}}")
                 | {{user.username}} &nbsp;
                 i.fas.fa-times
-              li.list-group-item(ng-if="user.readyStatus")
+              li.list-group-item(ng-if="user.readyStatus" id="{{user.id}}")
                 | {{user.username}} &nbsp;
                 i.fas.fa-check
           .col-md-3
@@ -21,10 +21,10 @@ block content
           .col-md-6
             .alert.alert-primary(role='alert')
               | Click number:
-              span#click-num 15
+              span#click-num 0
           .col-md-3
         .jumbotron.jumbotron-fluid.start
           .container
             p#game-status.lead Players waiting..
       div(align='center')
-        button.btn.btn-success(type='button') Ready
+        button.btn.btn-success#rdy(type='button' ng-click="onReadyClick($event)") Ready

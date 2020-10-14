@@ -30,6 +30,26 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         delete $scope.users[data.id];
         $scope.$apply();
       });
+
+      socket.on('initUsers', (data) => {
+        $scope.users = data;
+        $scope.$apply();
+      });
+
+      $scope.onReadyClick = ($event) => {
+        const readyStatus = $('#rdy').text();
+        socket.emit('changeStatus', { readyStatus });
+        if (readyStatus === "Ready") {
+          $('#rdy').html('Cancel').removeClass('btn-primary').addClass('btn-danger').attr('disabled', true);
+        }
+      }
+
+      socket.on('changeStatus', (data) => {
+        $scope.users[data.id] = data;
+        $scope.$apply();
+      });
+
+
     }).catch((err) => {
       console.log(err);
     });

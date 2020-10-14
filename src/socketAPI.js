@@ -17,11 +17,18 @@ io.on('connection', (socket) => {
     const userData = Object.assign(data, defaultData);
     users[socket.id] = userData;
     socket.broadcast.emit('newUser', userData);
+    socket.emit('initUsers', users);
   });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('disUser', users[socket.id]);
     delete users[socket.id];
+  });
+
+  socket.on('changeStatus', (data) => {
+    users[socket.id].readyStatus = (data.readyStatus === "Cancel") ? 0 : 1;
+    socket.broadcast.emit('changeStatus', users[socket.id]);
+    socket.emit('initUsers', users);
   });
 });
 
