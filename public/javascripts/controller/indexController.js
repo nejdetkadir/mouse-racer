@@ -11,7 +11,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
   };
 
   function initSocket(username) {
-    const url = 'https://mouse-racer.herokuapp.com'; // development
+    const url = 'https://mouse-racer.herokuapp.com'; // live demo
     indexFactory.connectSocket(url, {
       reconnectionAttempts: 3,
       reconnectionDelay: 600
@@ -61,6 +61,9 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
       });
 
       $scope.clickCalculator = ($event) => {
+        let total = $('#click-num').html();
+        total++;
+        $('#click-num').html(total);
         socket.emit('clickButton', {
           data: socket.id
         });
@@ -73,6 +76,7 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         $('#rdy').html('Ready').removeClass('btn-danger').addClass('btn-primary').attr('disabled', false);
         const username = $scope.users[data.data].username;
         alert(`${username} is winner!`);
+        $('#click-num').html(0);
       });
 
     }).catch((err) => {

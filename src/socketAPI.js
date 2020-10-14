@@ -30,6 +30,7 @@ function gameWon(users) {
       max_click = users[property].totalClick;
       socket_id = users[property].id;
     }
+    users[property].totalClick = 0;
   }
   return socket_id;
 }
